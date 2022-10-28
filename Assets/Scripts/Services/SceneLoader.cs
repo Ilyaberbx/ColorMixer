@@ -10,7 +10,14 @@ namespace ColorMixer.Scene
         public void NextLevel()
         {
             int buildIndex = SceneManager.GetActiveScene().buildIndex + 1;
-                SceneManager.LoadScene(buildIndex);
+
+            if(buildIndex > SceneManager.sceneCount)
+            {
+                SceneManager.LoadScene(0);
+                return;
+            }
+            SceneManager.LoadScene(buildIndex);
         }
+
     }
 }

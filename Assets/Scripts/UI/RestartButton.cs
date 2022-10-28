@@ -11,6 +11,8 @@ namespace ColorMixer.UI
         [SerializeField] private DOTweenUISettings _settings;
         [SerializeField] private Button _button;
         private ISceneLoader _sceneLoader;
+        private bool _isTapped;
+
         public void Initialize(ISceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
@@ -18,6 +20,9 @@ namespace ColorMixer.UI
         }
         private void Restart()
         {
+            if (_isTapped) return;
+
+            _isTapped = true;
             var sequence = DOTween.Sequence();
             sequence.Append(PunchButton());
             sequence.AppendCallback(_sceneLoader.Restart);
